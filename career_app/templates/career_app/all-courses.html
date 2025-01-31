@@ -1,0 +1,24 @@
+{% extends "career_app/base.html" %}
+
+{% block title %}All Courses - FCET Omoku CSC Portal{% endblock %}
+
+{% block content %}
+<!-- All Courses Section -->
+<div class="container mx-auto py-8">
+    <h1 class="text-4xl font-semibold text-white text-center mb-8">All Available Courses</h1>
+
+    {% if lms_courses %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for course in lms_courses %}
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-yellow-600 mb-4">{{ course.title }}</h2>
+                    <p class="text-white mb-4">{{ course.description }}</p>
+                    <a href="{% url 'career_app/lms_details' course.id %}" class="bg-yellow-600 text-white py-2 px-4 rounded-full hover:bg-yellow-700">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-white text-center">No courses available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

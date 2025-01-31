@@ -1,0 +1,37 @@
+{% extends "career_app/base.html" %}
+
+{% block title %}Course Details - FCET Omoku CSC Portal{% endblock %}
+
+{% block content %}
+<!-- Course Details Section -->
+<div class="container mx-auto py-8">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h1 class="text-4xl font-semibold text-yellow-600 mb-4">{{ lms_course_detail.name }}</h1>
+        
+        <p class="text-white mb-4">{{ lms_course_detail.description }}</p>
+        
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold text-yellow-600 mb-2">Instructor Information</h3>
+            <p class="text-white"><strong>Name:</strong> {{ lms_course_detail.instructor_name }}</p>
+            <p class="text-white"><strong>Email:</strong> {{ lms_course_detail.instructor_email }}</p>
+            <p class="text-white"><strong>Phone:</strong> {{ lms_course_detail.instructor_phone }}</p>
+        </div>
+        
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold text-yellow-600 mb-2">Course Schedule</h3>
+            <p class="text-white"><strong>Start Date:</strong> {{ lms_course_detail.start_date }}</p>
+            <p class="text-white"><strong>End Date:</strong> {{ lms_course_detail.end_date }}</p>
+            <p class="text-white"><strong>Time:</strong> {{ lms_course_detail.schedule_time }}</p>
+        </div>
+
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold text-yellow-600 mb-2">Course Requirements</h3>
+            <p class="text-white">{{ lms_course_detail.requirements }}</p>
+        </div>
+        
+        <div class="text-center">
+            <a href="{% url 'career_app/lms' %}" class="bg-yellow-600 text-white py-2 px-4 rounded-full hover:bg-yellow-700">Back to Courses</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

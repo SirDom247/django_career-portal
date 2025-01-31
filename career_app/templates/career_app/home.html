@@ -1,0 +1,533 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCET OMOKU CSC PORTAL</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/aa7454d09f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" rel="stylesheet">
+    <style>
+
+        :root{
+        --black:#000;
+        --white:#ffffff;
+        --lightgrey:#f1f1f1;
+        --darkblue:#0d102c;
+        --primarycolor:#3d51f2;
+        --secondarycolor:#5670ef;
+        --lightDark:#080A25;
+        --darkText:#8388B4;
+        }
+
+        body {
+            background-color: rgb(4, 8, 60);
+            font-family: 'Arial', sans-serif;
+        }
+
+        
+        .gridSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+        }
+        @media (max-width: 768px) {
+        .gridSection {
+            grid-template-columns: 1fr;
+        }
+        }
+        
+        .contactInput {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        }
+        .text-red-500 {
+            color: red;
+        }
+        .contactusBtn {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-yellow-800 w-full">
+        <div class="container mx-auto max-w-screen-xl flex justify-between items-center py-4 md:px-8">
+            <!-- Logo -->
+            <div id="logo" class="w-24 h-auto">
+                <a href="{% url 'career_app/home' %}">
+                    <img src="{% static 'images/csc-logo.png' %}" alt="csc-logo" class="object-contain">
+                </a>
+            </div>
+
+            <!-- Hamburger Menu Button -->
+            <button id="menu-toggle" class="text-white text-3xl md:hidden focus:outline-none">
+                ☰
+            </button>
+
+            <!-- Navbar Items -->
+            <nav id="menu" class="hidden md:flex md:space-x-8 items-center w-100%">
+                <ul class="flex flex-col md:flex-row space-x-4 space-y-2 md:space-y-0">
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/home' %}">Home</a></li>
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/contact' %}">Contact</a></li>
+                    <!-- <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/lms' %}">LMS</a></li> -->
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/events' %}">Events</a></li>
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/lms' %}">LMS</a></li>
+                    <!-- <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/signup' %}">Sign Up</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-grow">
+    <section class="py-16 px-4">
+        <div class="bg-[var(--darkblue)]">
+        <div class="container mx-auto max-w-screen-xl text-center">
+            <p class="text-4xl font-bold text-white">Career Service Centre</p>
+            <h1 class="mt-4 text-3xl font-semibold text-green-500">Federal College of Education (Technical) Omoku</h1>
+            <p class="mt-6 text-lg text-white">Explore our professional career services designed to help you thrive in today’s challenging labour market.</p>
+            <a href="{% url 'career_app/contact' %}" class="mt-8 inline-block bg-yellow-700 text-green-500 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-600 transition">Click Here to Get in Touch</a>
+        </div>
+        </div>
+    </section>
+    <!-- Carousel Section -->
+<section class="my-10 mx-auto px-4">
+    <div class="container mx-auto max-w-screen-xl w-screen justify-center">
+        <div class="splide" id="carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="{% static 'images/banner1.jpg' %}" 
+                            alt="Banner 1" 
+                            class="rounded-lg shadow-md w-screen h-[400px] sm:h-[250px] md:h-[350px] lg:h-[450px] object-contain">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="{% static 'images/banner2.jpg' %}" 
+                            alt="Banner 2" 
+                            class="rounded-lg shadow-md w-screen h-[400px] sm:h-[250px] md:h-[350px] lg:h-[450px] object-contain">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="{% static 'images/banner3.jpg' %}" 
+                            alt="Banner 3" 
+                            class="rounded-lg shadow-md w-screen h-[400px] sm:h-[250px] md:h-[350px] lg:h-[450px] object-contain">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="{% static 'images/banner6.jpg' %}" 
+                            alt="Banner 5" 
+                            class="rounded-lg shadow-md w-screen h-[400px] sm:h-[250px] md:h-[350px] lg:h-[450px] object-contain">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="{% static 'images/banner7.jpg' %}" 
+                            alt="Banner 6" 
+                            class="rounded-lg shadow-md w-screen h-[400px] sm:h-[250px] md:h-[350px] lg:h-[450px] object-contain">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script>
+        // JavaScript for toggling the menu
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+    <section class="bg-gradient-to-b from-green-800 to-gray-900 py-16 w-full">
+        <div class="container mx-auto px-6 lg:px-20">
+            <!-- Title Section -->
+            <div class="text-center mb-10">
+                <h1 class="text-4xl lg:text-4xl font-extrabold text-yellow-400 leading-tight">
+                    Empowering Futures Through <span class="text-yellow-400">Premium Career Services</span>
+                </h1>
+            </div>
+    
+            <!-- Director Photo and Content -->
+            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+                <!-- Director's Photo -->
+                <div class="relative w-full lg:w-1/2 flex justify-center">
+                    <img src="{% static 'images/fcetomokucsc_Director.jpg' %}" 
+                         alt="Director's Photo" 
+                         class="rounded-lg shadow-lg w-full max-w-md object-cover">
+    
+                    <!-- Name Overlayed on Bottom of Image -->
+                    <p class="absolute bottom-0 w-full bg-black bg-opacity-60 text-white text-center py-2 text-2xl font-medium rounded-b-lg">
+                        Dr. Rejoice Fredrick <br><span class="font-normal text-black">Director</span> 
+                    </p>
+                </div>
+    
+                <!-- Text Content (Speech) -->
+                <div class="w-full lg:w-1/2">
+                    <p class="text-lg lg:text-lg text-gray-200 font-light leading-relaxed mb-6 text-center lg:text-left"> 
+                        The Federal College of Education (Technical) Omoku Career Service Centre is a pivotal initiative of the Tertiary Education Trust Fund (TETFUND) designed to bridge the gap between tertiary institutions and the dynamic job market. The center enhances employability by equipping graduates with the skills, guidance, and resources to thrive in their professional careers.
+                        At Career Service Centre, Federal College of Education (Technical) Omoku, we are dedicated to guiding students and graduates toward their career aspirations. With resources, mentorship, and opportunities, we help students and professionals successfully navigate the competitive employment landscape toward a fulfilled future.
+                        Our mission is to provide a structured and accessible career support system, ensuring students and recent graduates can successfully navigate the competitive job landscape with confidence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+   
+    
+            <h3 class="text-3xl font-bold text-green-500 mb-8 text-center mt-4">Key Services</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Career Counseling and Guidance</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Personalized counseling to identify your strengths, interests, and aspirations, helping you 
+                        make informed career decisions.
+                    </p>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Job Placement Assistance</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Partnering with industry leaders to provide job and internship opportunities that offer practical 
+                        experience and meaningful employment.
+                    </p>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Workshops and Training Programs</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Enhance your employability skills with resume building, interview preparation, personal branding, 
+                        and communication training.
+                    </p>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Networking Opportunities</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Connect with industry professionals, alumni, and employers to gain insights and open doors 
+                        to career opportunities.
+                    </p>
+                </div>
+                <!-- Service Card 5 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Entrepreneurship Support</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Explore innovative business ideas with mentorship programs and resources to launch your 
+                        entrepreneurial journey.
+                    </p>
+                </div>
+                <!-- Service Card 6 -->
+                <div class="bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Access to Career Resources</h4>
+                    <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                    <p class="text-gray-200 text-sm leading-relaxed">
+                        Stay informed with job boards, career assessments, recruitment fairs, and industry-specific reports.
+                    </p>
+                </div>
+            </div>
+    </section>
+
+<!-- Partnerships Section -->
+<section class="bg-gray-900 py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl text-green-500 font-extrabold mb-10">Our Partnerships</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Rigel IT Academy Partnership -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <h3 class="text-2xl text-yellow-400 font-bold mb-4">Rigel IT Academy</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">Collaborating with Rigel IT Academy, we provide cutting-edge IT career guidance and training programs. Together, we empower individuals with the skills to excel in the tech industry.</p>
+                <a href="#" class="text-green-500 mt-4 inline-block hover:underline">Learn More</a>
+            </div>
+            <!-- CERD FCE(T) Omoku Partnership -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <h3 class="text-2xl text-yellow-400 font-bold mb-4">Centre for Entrepreneurship and Research Development</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">In partnership with CERD FCE(T) Omoku, we foster entrepreneurial skills and innovation, equipping students to succeed in business and research ventures.</p>
+                <a href="#" class="text-green-500 mt-4 inline-block hover:underline">Learn More</a>
+            </div>
+            <!-- Centre of Excellence Partnership -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <h3 class="text-2xl text-yellow-400 font-bold mb-4">Centre of Excellence, FCE(T) Omoku</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">Our collaboration with the Centre of Excellence focuses on academic excellence and professional development, ensuring students are equipped for global challenges.</p>
+                <a href="#" class="text-green-500 mt-4 inline-block hover:underline">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-900 py-16">
+    <div class="container mx-auto text-center">
+        <!-- Achievements Header -->
+        <h2 class="text-4xl font-extrabold text-green-500 mb-8">Our Achievements</h2>
+        <p class="text-gray-300 text-lg mb-12">
+            In just a few months, we've made remarkable strides in empowering students and alumni for successful careers. Here’s what we’ve accomplished so far:
+        </p>
+        <!-- Achievements Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Clients Card -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-yellow-400 text-6xl mb-4">
+                    <i class="fas fa-users"></i> <!-- Font Awesome Icon -->
+                </div>
+                <h3 class="text-3xl font-bold text-yellow-400 mb-2">300+ Clients</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">
+                    Trusted by students, alumni, and organizations across various industries.
+                </p>
+            </div>
+            <!-- Projects Card -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-yellow-400 text-6xl mb-4">
+                    <i class="fas fa-briefcase"></i> <!-- Font Awesome Icon -->
+                </div>
+                <h3 class="text-3xl font-bold text-yellow-400 mb-2">10+ Success Stories</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">
+                    Success stories of students and professionals who have thrived through our comprehensive career services, paving the way for brighter and more successful futures.
+            </div>
+            <!-- Workshops Card -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                <div class="text-yellow-400 text-6xl mb-4">
+                    <i class="fas fa-chalkboard-teacher"></i> <!-- Font Awesome Icon -->
+                </div>
+                <h3 class="text-3xl font-bold text-yellow-400 mb-2">10+ Career Workshops</h3>
+                <hr class="border-t-4 border-green-300 mt-0 mb-2">
+                <p class="text-gray-300">
+                    Organized impactful workshops to enhance employability skills and career readiness.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+ <!-- Testimonials Section -->
+ <section class="py-16 bg-gray-100">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6 text-green-500">Testimonials</h2>
+        <div class="splide" id="testimonial-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <div class="bg-white p-6 shadow rounded-lg">
+                            <p class="text-gray-700 mb-4">"The career counseling services provided by FCET Omoku Career Service Centre were instrumental in helping me secure my dream job. The guidance and support I received were top-notch!"</p>
+                            <h3 class="text-xl font-semibold text-yellow-800">Chuks Christiana</h3>
+                            <p class="text-gray-500">Alumni</p>
+                        </div>
+                    </li>
+                    <li class="splide__slide">
+                        <div class="bg-white p-6 shadow rounded-lg">
+                            <p class="text-gray-700 mb-4">"The resume building workshop was incredibly helpful. I learned how to create a professional resume that stands out to employers. Highly recommend their services!"</p>
+                            <h3 class="text-xl font-semibold text-yellow-800">Jane Uche</h3>
+                            <p class="text-gray-500">Student</p>
+                        </div>
+                    </li>
+                    <li class="splide__slide">
+                        <div class="bg-white p-6 shadow rounded-lg">
+                            <p class="text-gray-700 mb-4">"Thanks to the job placement assistance, I was able to connect with top employers and secure a fantastic internship. The networking opportunities were invaluable."</p>
+                            <h3 class="text-xl font-semibold text-yellow-800">Uchechi Ahiakwo</h3>
+                            <p class="text-gray-500">Graduate</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#testimonial-carousel', {
+            type: 'loop',
+            autoplay: true,
+            interval: 5000,
+            perPage: 1,
+            perMove: 1,
+        }).mount();
+    });
+</script>
+</section>
+
+  <!-- Include Swiper.js CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<section class="py-16 bg-gray-900">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-green-500 mb-8">Blog</h2>
+        
+        <!-- Swiper Container -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- Blog 1 -->
+                <a href="/blog/interview-tips" class="swiper-slide bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">5 Tips for Acing Job Interviews</h4>
+                    <p class="text-gray-300 text-sm">Prepare effectively for interviews with these expert tips.</p>
+                </a>
+                <!-- Blog 2 -->
+                <a href="/blog/top-skills" class="swiper-slide bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Top Skills Employers Seek</h4>
+                    <p class="text-gray-300 text-sm">Learn the top skills in demand for 2025.</p>
+                </a>
+                <!-- Blog 3 -->
+                <a href="/blog/build-portfolio" class="swiper-slide bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">How to Build a Portfolio</h4>
+                    <p class="text-gray-300 text-sm">Showcase your skills effectively with a standout portfolio.</p>
+                </a>
+                <!-- Blog 4 -->
+                <a href="/blog/time-management" class="swiper-slide bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Time Management Hacks</h4>
+                    <p class="text-gray-300 text-sm">Boost your productivity with these simple tips.</p>
+                </a>
+                <!-- Blog 5 -->
+                <a href="/blog/remote-work" class="swiper-slide bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none">
+                    <h4 class="text-xl font-semibold text-yellow-300 mb-4">Remote Work Essentials</h4>
+                    <p class="text-gray-300 text-sm">Navigate remote work effectively with these strategies.</p>
+                </a>
+            </div>
+
+            <!-- Swiper Navigation Buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Swiper.js Script -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    // Initialize Swiper
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: 1,
+        spaceBetween: 20,
+        breakpoints: {
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+        },
+    });
+</script>
+
+
+
+<section class="bg-gray-800 py-12">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-green-500 mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+            <div class="bg-gray-700 p-6 rounded-lg">
+                <h4 class="text-yellow-300 text-lg font-semibold">How can I access career counseling?</h4>
+                <p class="text-gray-300 mt-2">You can book a session through our "Contact" page or visit the center directly.</p>
+            </div>
+            <div class="bg-gray-700 p-6 rounded-lg">
+                <h4 class="text-yellow-300 text-lg font-semibold">Are your services free for students?</h4>
+                <p class="text-gray-300 mt-2">Yes, all our services are free for registered students and alumni.</p>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+</main>
+
+
+    <!-- Footer -->
+    <footer class="w-full mt-10 text-white py-10">
+        <div class="bg-[var(--darkblue)]">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 sm:grid-cols-2 gap-10">
+                <!-- About Us -->
+                <div class="space-y-4">
+                    <img src="{% static 'images/csc-logo.png' %}" alt="Logo" class="w-24">
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Follow us on our social media platforms: <br>
+                        <span class="text-yellow-500 font-semibold">@fcetomoku-career-services-centre</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"><img class="w-6 transition-transform transform hover:scale-125" src="{% static 'images/fabook-icon-white.svg' %}" alt="Facebook"></a>
+                        <a href="#"><img class="w-6 transition-transform transform hover:scale-125" src="{% static 'images/twitter-icon-white.svg' %}" alt="Twitter"></a>
+                        <a href="#"><img class="w-6 transition-transform transform hover:scale-125" src="{% static 'images/inkedin-icon-white.svg' %}" alt="LinkedIn"></a>
+                        <a href="#"><img class="w-6 transition-transform transform hover:scale-125" src="{% static 'images/whatsapp-icon-white.svg' %}" alt="WhatsApp"></a>
+                    </div>
+                </div>
+
+                <!-- Explore -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4 text-yellow-400">Explore</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">About us</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4 text-yellow-400">Services</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Career counselling</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Resume writing</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Interview training</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Admissions support</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Scholarship guide</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Leadership coaching</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4 text-yellow-400">Resources</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">E-books</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Resume Samples</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Mock Interview Videos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright Section -->
+            <div class="text-center mb-auto mt-10 bg-yellow-700 py-8 text-gray-900 font-semibold">
+                <p>&copy; 2025 FCE(T) Omoku Career Services Centre. All rights reserved.</p>
+                <p class="font-bold">Powered By: Rigel Tech Konsultz</p>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#carousel', {
+                type: 'loop',
+                autoplay: true,
+                interval: 3000,
+            }).mount();
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
+

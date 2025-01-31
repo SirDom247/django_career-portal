@@ -1,0 +1,52 @@
+{% extends "career_app/base.html" %}
+
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <h2 class="text-2xl font-bold">Welcome to the LMS, <span class="text-blue-600">{{ user.username }}</span>!</h2>
+    <p class="text-gray-600">Here are the available courses:</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {% for course in courses %}
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <h3 class="text-lg font-semibold">{{ course.title }}</h3>
+                <p class="text-gray-700">{{ course.description }}</p>
+                <a href="#" class="text-blue-600 hover:underline mt-2 block">View Details</a>
+            </div>
+        {% empty %}
+            <p>No courses available at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- <div class="container mx-auto py-8">
+    <h1 class="text-4xl font-bold text-center text-blue-600">Available Career Courses</h1>
+    <div id="courses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"></div>
+</div> -->
+<script>
+    // Fetch courses from the backend API
+    async function fetchCourses() {
+        const response = await fetch('/get-courses/');
+        const data = await response.json();
+        const coursesContainer = document.getElementById('courses');
+        
+        if (data.error) {
+            coursesContainer.innerHTML = `<p class="text-red-500">${data.error}</p>`;
+            return;
+        }
+
+        data.forEach(course => {
+            const courseCard = document.createElement('div');
+            courseCard.classList.add('border', 'rounded-lg', 'p-4', 'bg-white', 'shadow');
+            courseCard.innerHTML = `
+                <h2 class="text-xl font-semibold text-gray-700">${course.name}</h2>
+                <p class="text-gray-600">${course.description || 'No description available.'}</p>
+                <a href="${course.html_url}" target="_blank" class="text-blue-500 hover:underline">View Course</a>
+            `;
+            coursesContainer.appendChild(courseCard);
+        });
+    }
+    fetchCourses();
+</script>
+{% endblock %}

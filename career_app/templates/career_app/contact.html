@@ -1,0 +1,99 @@
+{% extends 'career_app/base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<section class="gridSection contactSection">
+    <div class="contactformContainer">
+        <h1 class="text-green-700 font-semibold text-center text-4xl pb-4">Get in touch</h1>
+        
+        {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+            <div class="text-sm {{ message.tags }} p-3 rounded-lg mb-2">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" class="contactForm">
+            {% csrf_token %}
+            <div>
+                <label for="name" class="sr-only">Full Name</label>
+                <input id="name" type="text" name="name" placeholder="Full name" class="contactInput" required minlength="3" maxlength="100">
+                {% if form.name.errors %}
+                <small class="text-red-500">{{ form.name.errors.0 }}</small>
+                {% endif %}
+                
+                <label for="email" class="sr-only">Email</label>
+                <input id="email" type="email" name="email" placeholder="Email" class="contactInput" required>
+                {% if form.email.errors %}
+                <small class="text-red-500">{{ form.email.errors.0 }}</small>
+                {% endif %}
+            </div>
+            
+            <label for="subject" class="sr-only">Subject</label>
+            <input id="subject" type="text" name="subject" placeholder="Subject" class="contactInput" required minlength="3" maxlength="200">
+            {% if form.subject.errors %}
+            <small class="text-red-500">{{ form.subject.errors.0 }}</small>
+            {% endif %}
+            
+            <label for="message" class="sr-only">Message</label>
+            <textarea id="message" name="message" cols="30" rows="5" placeholder="Message" class="contactInput" required minlength="10"></textarea>
+            {% if form.message.errors %}
+            <small class="text-red-500">{{ form.message.errors.0 }}</small>
+            {% endif %}
+            
+            <div class="contactusBtn">
+                <button type="submit" class="bg-green-700 font-semibold text-white text-center rounded-lg text-2xl px-20 py-3 w-auto">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+    {% load static %}
+    <div class="sectionPic bouncepic contactPic" id="sectionPic">
+        <img src="{% static 'images/contact-img.png' %}" alt="Contact Illustration">
+    </div>
+</section>
+
+
+
+<h1 class="addressHeader">Locate us at</h1>
+<div class="address">
+    {% for location in locations %}
+    <div class="eachAddress">
+        <h1>{{ location.name }}</h1>
+        <p>Phone: {{ location.phone }}</p>
+        <p>Address: {{ location.address }}</p>
+        <p>Email: {{ location.email }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .gridSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    @media (max-width: 768px) {
+        .gridSection {
+            grid-template-columns: 1fr;
+        }
+    }
+    .contactInput {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .text-red-500 {
+        color: red;
+    }
+    .contactusBtn {
+        text-align: center;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- career_app/templates/career_app/resend_verification_email.html -->
+{% extends "career_app/base.html" %}
+
+{% block content %}
+    <div class="text-center text-white mt-4">
+        <h2 class="font-semibold text-2xl text-green-800">Resend Verification Email</h2>
+        <h3 class="font-medium mt-2">Please check your inbox for the verification email</h3>
+    </div>
+
+    <hr class="border border-yellow-800 h-1 mt-2">
+
+    <!-- Display Django messages -->
+    {% if messages %}
+        <div class="mt-4">
+            {% for message in messages %}
+                <div class="p-2 rounded {% if message.tags %} {{ message.tags }} {% else %}bg-green-200 text-green-800{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="flex items-center justify-center">
+        <div class="bg-white p-8 shadow-md rounded-lg max-w-md w-full mt-4 text-black">
+            <h4 class="font-semibold text-xl text-green-800">Verification Email Sent</h4>
+            <p class="mt-2 text-lg text-black">
+                A verification email has been sent to your email address. Please check your inbox and follow the instructions to verify your account.
+            </p>
+
+            <p class="text-center mt-4 text-lg text-black">
+                If you didn't receive the email, you can try again by clicking 
+                <a href="{% url 'career_app:resend_verification_email' user.id %}" class="text-green-800 font-semibold hover:underline">here</a>.
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'career_app/base.html' %}
+
+{% block title %}Events | Career Service Centre{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!-- Header Section -->
+<header class="text-green-600 py-6 mt-6">
+    <div class="container text-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold">Our Events & Programs</h1>
+        <p class="mt-2 text-base md:text-lg">Stay updated with the latest workshops, seminars, and career development events.</p>
+    </div>
+</header>
+
+<!-- Event List Section -->
+<section class="py-12 md:py-16 w-full">
+    <div class="container mx-auto px-4 w-100">
+        <!-- Event Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+            <!-- Example Event Card 1 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out w-full text-center">
+                <img src="{% static 'images/event1.jpg' %}" alt="Event Image" class="rounded-lg mb-4 w-full">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-2">Resume Building Workshop</h3>
+                <p class="text-gray-300 mb-4">
+                    Learn how to craft a professional resume that stands out to recruiters.
+                </p>
+                <a href="{% url 'career_app/event_detail' 1 %}" class="text-green-500 font-bold hover:underline">Cominig Soon</a>
+            </div>
+
+            <!-- Example Event Card 2 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out w-full text-center">
+                <img src="{% static 'images/event2.jpg' %}" alt="Event Image" class="rounded-lg mb-4 w-full">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-2">Career Networking Fair</h3>
+                <p class="text-gray-300 mb-4">
+                    Connect with industry professionals and explore exciting job opportunities.
+                </p>
+              
+                <a href="{% url 'career_app/event_detail' 2 %}" class="text-yellow-400 font-bold hover:underline">Cominig soon</a>
+            </div>
+
+            <!-- Example Event Card 3 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out w-full text-center">
+                <img src="{% static 'images/event3.jpg' %}" alt="Event Image" class="rounded-lg mb-4 w-full">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-2">Entrepreneurship Bootcamp</h3>
+                <p class="text-gray-300 mb-4">
+                    A hands-on program to help you develop your entrepreneurial skills and launch your business.
+                </p>
+                 
+                <a href="{% url 'career_app/event_detail' 3 %}" class="text-yellow-400 font-bold hover:underline">Coming soon</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="bg-yellow-500 py-12">
+    <div class="container mx-auto px-4 text-center max-w-2xl">
+        <h2 class="text-3xl font-extrabold text-gray-900">Don’t Miss Our Upcoming Events</h2>
+        <p class="text-lg text-gray-700 mt-4 mb-8">
+            Register today and take a step towards achieving your career goals.
+        </p>
+        <a href="#" class="bg-gray-900 text-yellow-400 px-6 py-3 rounded-lg font-bold hover:bg-gray-700 transition">
+            View All Events
+        </a>
+    </div>
+</section>
+{% endblock %}

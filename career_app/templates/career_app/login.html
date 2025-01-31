@@ -1,0 +1,95 @@
+{% extends "career_app/base.html" %}
+
+{% block content %}
+{% load static %}
+<br><br>
+
+<div class="text-center mt-4">
+    <h2 class="font-bold text-3xl text-green-800">Login</h2>
+    <h3 class="font-medium mt-2 text-gray-700">Access your learning management system dashboard</h3>
+</div>
+
+<hr class="border-t-4 border-yellow-800 w-1/2 mx-auto mt-6">
+
+<!-- Display Form Errors -->
+{% if form.errors %}
+<div class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
+    {% for field, errors in form.errors.items %}
+    <div>
+        <strong class="capitalize">{{ field }}:</strong>
+        {% for error in errors %}
+        <p class="ml-4">- {{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="flex items-center justify-center mt-6">
+    <div class="bg-white p-8 shadow-md rounded-lg max-w-md w-full text-gray-800">
+        <h1 class="text-center text-2xl font-semibold mb-4">Login</h1>
+
+        <!-- Django Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 p-3 rounded 
+                    {% if message.tags == 'error' %} bg-red-100 text-red-700 
+                    {% else %} bg-blue-100 text-blue-700 
+                    {% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Login Form -->
+        <form class="space-y-6" action="{% url 'career_app/login' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="username_or_email" class="block font-medium mb-1 text-gray-700">Username or Email</label>
+                <input type="text" id="username_or_email" name="username_or_email" 
+                       placeholder="Enter your username or email..." 
+                       class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-800"
+                       value="{{ form.username_or_email.value|default_if_none:'' }}">
+            </div>
+
+            <div>
+                <label for="password" class="block font-medium mb-1 text-gray-700">Password</label>
+                <input type="password" id="password" name="password" 
+                       placeholder="Enter your password..." 
+                       class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
+
+            <button type="submit"
+                class="w-full bg-green-800 text-white font-semibold rounded p-3 hover:bg-green-700 focus:ring-2 focus:ring-green-800 transition">
+                Login
+            </button>
+        </form>
+
+        <!-- Resend Verification Email -->
+        {% if user.id and not user.is_active %}
+        <p class="mt-6 text-center text-gray-700">
+            Haven't received your verification email? 
+            <a href="{% url 'career_app/email/resend_verification_email' user.id %}" class="text-green-800 font-semibold hover:underline">
+                Click here to resend verification email.
+            </a>
+        </p>
+        {% endif %}
+
+        <!-- Signup Link -->
+        <p class="mt-6 text-center text-gray-700">
+            Don't have an account? 
+            <a href="{% url 'career_app/signup' %}" class="text-green-800 font-semibold hover:underline">
+                Sign up here
+            </a>
+        </p>
+
+        <!-- Forgot Password Link -->
+        <p class="mt-4 text-center text-gray-700">
+            Forgot your password? 
+            <a href="{% url 'career_app/email/forgot-password' %}" class="text-green-800 font-semibold hover:underline">
+                Reset Password
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock %}

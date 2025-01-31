@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FCET OMOKU CSC PORTAL{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/aa7454d09f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" rel="stylesheet">
+    <style>
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        body {
+            background-color: rgb(4, 8, 60);
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/commonStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-yellow-800 ml-0">
+        <div class="container mx-auto flex justify-between items-center py-4">
+            <div id="logo" class="w-24 h-auto ml-0">
+                <a href="{% url 'career_app/home' %}">
+                    <img src="{% static 'images/csc-logo.png' %}" alt="fcetomokucsc-logo" class="object-contain">
+                </a>
+            </div>
+            <nav class="flex items-center">
+                <ul class="flex space-x-4">
+                    <li><a class="font-semibold font-xl text-white hover:text-blue-900" href="{% url 'career_app/home' %}">Home</a></li>
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/contact' %}">Contact</a></li>
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/events' %}">Events</a></li>
+                    <li><a class="font-semibold text-white hover:text-blue-900" href="{% url 'career_app/lms' %}">LMS</a></li>
+                </ul>
+            </nav>                                                                                                           
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footerlinksContainer">
+            <div class="footerAboutus">
+                <img src="{% static 'images/csc-logo.png' %}" alt="Logo">
+                <p class="darkPara">Follow us on our social media platforms:<br>
+                    <span class="text-white font-2xl-semibold">@fcetomoku-career-services-centre</span>
+                </p>
+                <div class="footersociallinkContainer">
+                    <img class="sociallink" src="{% static 'images/fabook-icon-white.svg' %}" alt="Facebook">
+                    <img class="sociallink" src="{% static 'images/twitter-icon-white.svg' %}" alt="Twitter">
+                    <img class="sociallink" src="{% static 'images/inkedin-icon-white.svg' %}" alt="LinkedIn">
+                    <img class="sociallink" src="{% static 'images/whatsapp-icon-white.svg' %}" alt="WhatsApp">
+                </div>
+            </div>
+
+            <div class="footerlink">
+                <h1 class="linkTitle">Explore</h1>
+                <a href="#" class="eachLink">About us</a>
+                <a href="#" class="eachLink">FAQ</a>
+                <a href="#" class="eachLink">Blog</a>
+                <a href="#" class="eachLink">Contact</a>
+            </div>
+
+            <div class="footerlink">
+                <h1 class="linkTitle">Services</h1>
+                <a href="#" class="eachLink">Career counselling</a>
+                <a href="#" class="eachLink">Resume writing</a>
+                <a href="#" class="eachLink">Interview preparation training</a>
+                <a href="#" class="eachLink">Admissions support</a>
+                <a href="#" class="eachLink">Scholarship application guide</a>
+                <a href="#" class="eachLink">Leadership coaching</a>
+            </div>
+
+            <div class="footerlink">
+                <h1 class="linkTitle">Resource</h1>
+                <a href="#" class="eachLink">E-books</a>
+                <a href="#" class="eachLink">Resume Samples</a>
+                <a href="#" class="eachLink">Mock Interviews Videos</a>
+            </div>
+        </div>
+
+        <div class="text-center bg-yellow-800 py-4 font-semibold">
+            <p>&copy; 2025 FCE(T) Omoku Career Services Centre. All rights reserved.</p>
+            <br>
+            <p class="text-gray-900 font-bold">Powered By: Rigel IT Consultz</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#carousel', {
+                type: 'loop',
+                autoplay: true,
+                interval: 3000,
+            }).mount();
+        });
+    </script>
+</body>
+</html>
