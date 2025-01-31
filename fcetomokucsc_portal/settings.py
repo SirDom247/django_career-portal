@@ -89,14 +89,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('SMTP_SERVER', 'in_v3.mailjet.com')
-EMAIL_PORT = int(os.getenv('PORT', 465))
+
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'  
+EMAIL_PORT = 587  
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('MAILJET_API_KEY')
-EMAIL_HOST_PASSWORD = os.getenv('MAILJET_SECRET_KEY')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+EMAIL_USE_SSL = False 
+EMAIL_HOST_USER = 'ebc55b8ecfd6ac8ad2e4840d92736f23' 
+EMAIL_HOST_PASSWORD = 'ffc2cdefb2bd1ef72a892637ccd512aa' 
+DEFAULT_FROM_EMAIL = 'no_reply@fcetomokucsc.ng'
 
 MAILJET_API_KEY =  os.getenv('MAILJET_API_KEY')
 MAILJET_SECRET_KEY = os.getenv('MAILJET_SECRET_KEY')
@@ -107,15 +108,6 @@ MAILJET_SECRET_KEY = os.getenv('MAILJET_SECRET_KEY')
 
 
 LOGIN_URL = 'career_app/login'
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST="smtp.gmail.com"
-# EMAIL_PORT=465
-# EMAIL_USE_SSL=True
-# EMAIL_HOST_USER="ssesconf2024@gmail.com"
-# EMAIL_HOST_PASSWORD="wkfe ulxx tjqt oivt"
-# DEFAULT_FROM_EMAIL="ssesconf2024@gmail.com"
-# DEFAULT_FROM_USER = "FCETOMOKUCSC <ssesconf2024@gmail.com>"
 
 
 

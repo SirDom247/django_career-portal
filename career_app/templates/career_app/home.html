@@ -56,6 +56,79 @@
             text-align: center;
         }
 
+                /* General Styling for the Newsletter Section */
+        .newsletter-section {
+            background: #f9f9f9;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 5px solid #00c8b0;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .newsletter-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .newsletter-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .newsletter-input {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 60%;
+            margin-right: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            border-color: #00c8b0;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 10px 20px;
+            background-color: #00c8b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background-color: #008c7e;
+        }
+
+        .newsletter-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+            font-style: italic;
+        }
+
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -96,7 +169,7 @@
             <p class="text-4xl font-bold text-white">Career Service Centre</p>
             <h1 class="mt-4 text-3xl font-semibold text-green-500">Federal College of Education (Technical) Omoku</h1>
             <p class="mt-6 text-lg text-white">Explore our professional career services designed to help you thrive in today’s challenging labour market.</p>
-            <a href="{% url 'career_app/contact' %}" class="mt-8 inline-block bg-yellow-700 text-green-500 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-600 transition">Click Here to Get in Touch</a>
+            <a href="{% url 'career_app/contact' %}" class="mt-8 inline-block bg-yellow-500 text-green-400 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-600 transition">Click Here to Get in Touch</a>
         </div>
         </div>
     </section>
@@ -163,7 +236,7 @@
     
                     <!-- Name Overlayed on Bottom of Image -->
                     <p class="absolute bottom-0 w-full bg-black bg-opacity-60 text-white text-center py-2 text-2xl font-medium rounded-b-lg">
-                        Dr. Rejoice Fredrick <br><span class="font-normal text-black">Director</span> 
+                        Dr Vivian Mark Williams <br><span class="font-normal text-black">Centre Director</span> 
                     </p>
                 </div>
     
@@ -178,7 +251,6 @@
             </div>
         </div>
     </section>
-    
    
     
             <h3 class="text-3xl font-bold text-green-500 mb-8 text-center mt-4">Key Services</h3>
@@ -315,8 +387,6 @@
     </div>
 </section>
 
-
-
  <!-- Testimonials Section -->
  <section class="py-16 bg-gray-100">
     <div class="container mx-auto text-center">
@@ -434,7 +504,6 @@
 </script>
 
 
-
 <section class="bg-gray-800 py-12">
     <div class="container mx-auto text-center">
         <h2 class="text-3xl font-bold text-green-500 mb-8">Frequently Asked Questions</h2>
@@ -450,6 +519,19 @@
         </div>
     </div>
 </section>
+
+<section class="newsletter-section">
+    <div class="newsletter-container">
+        <h2 class="newsletter-title">Stay Updated with Our News</h2>
+        <p class="newsletter-description">Sign up for our newsletter and be the first to know about our latest updates, offers, and events.</p>
+        <form action="/subscribe/" method="POST" class="newsletter-form">
+            <input type="email" name="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+        <p class="newsletter-footer">We respect your privacy. No spam.</p>
+    </div>
+</section>
+
  
 </main>
 

@@ -1,10 +1,98 @@
 {% extends 'career_app/base.html' %}
 {% block title %}Contact Us{% endblock %}
 {% block content %}
+
+<style>
+    .gridSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    @media (max-width: 768px) {
+        .gridSection {
+            grid-template-columns: 1fr;
+        }
+    }
+    .contactInput {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .text-red-500 {
+        color: red;
+    }
+    .contactusBtn {
+        text-align: center;
+    }
+
+    .locations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+    background: #aabcaeb8;
+}
+
+.location-card {
+    background: hsl(0, 11%, 96%);
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #555;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+span {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+</style>
+
 <section class="gridSection contactSection">
     <div class="contactformContainer">
         <h1 class="text-green-700 font-semibold text-center text-4xl pb-4">Get in touch</h1>
         
+{% load static %}
         {% if messages %}
         <div class="mb-4">
             {% for message in messages %}
@@ -57,43 +145,20 @@
 
 
 
-<h1 class="addressHeader">Locate us at</h1>
-<div class="address">
+<div class="locations">
     {% for location in locations %}
-    <div class="eachAddress">
-        <h1>{{ location.name }}</h1>
-        <p>Phone: {{ location.phone }}</p>
-        <p>Address: {{ location.address }}</p>
-        <p>Email: {{ location.email }}</p>
-    </div>
+        <div class="location-card">
+            <div class="icon-container">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <p class="text-2xl text-black font-serif">Locate us</p>
+            <hr class="w-100 h-6 text-green-700">
+            <h3>{{ location.name }}</h3>
+            <p><span>📍</span> {{ location.address }}</p>
+            <p><span>📞</span> {{ location.phone }}</p>
+            <p><span>📧</span> <a href="mailto:{{ location.email }}">{{ location.email }}</a></p>
+        </div>
     {% endfor %}
 </div>
 
-<style>
-    .gridSection {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        padding: 20px;
-    }
-    @media (max-width: 768px) {
-        .gridSection {
-            grid-template-columns: 1fr;
-        }
-    }
-    .contactInput {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .text-red-500 {
-        color: red;
-    }
-    .contactusBtn {
-        text-align: center;
-    }
-</style>
 {% endblock %}

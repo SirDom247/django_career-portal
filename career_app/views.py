@@ -37,14 +37,10 @@ def about(request):
     return render(request, 'career_app/aboutus.html')
 
  
-
-from django.shortcuts import render, redirect
-from .forms import ContactForm
-from .models import ContactMessage
+ 
 from django.core.mail import send_mail
-
+from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
 from .forms import ContactForm
 from .models import ContactMessage
 
@@ -52,40 +48,94 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Save the form data to the database
+            # Save message in the database
             contact_message = ContactMessage(
                 name=form.cleaned_data['name'],
                 email=form.cleaned_data['email'],
                 subject=form.cleaned_data['subject'],
                 message=form.cleaned_data['message']
             )
-            contact_message.save()  # Save to the database
+            contact_message.save()
+ 
+            from_email = "no-reply@fcetomokucsc.ng"   
+            admin_email = "admin@fcetomokucsc.ng" 
+            reply_to_email = form.cleaned_data['email']   
 
-            # Optionally, send an email
-            send_mail(
-                form.cleaned_data['subject'],
-                form.cleaned_data['message'],
-                form.cleaned_data['email'],
-                ['admin@fcetomokucsc.ng'],
-                fail_silently=False
+            email_body = f"""
+            You have received a new contact form submission:
+
+            Name: {form.cleaned_data['name']}
+            Email: {form.cleaned_data['email']}
+            Subject: {form.cleaned_data['subject']}
+            Message:
+            {form.cleaned_data['message']}
+
+            You can reply directly to this email to respond to the sender.
+            """
+            email = EmailMessage(
+                subject=form.cleaned_data['subject'],
+                body=email_body,
+                from_email=from_email, 
+                to=[admin_email],  
+                reply_to=[reply_to_email]   
             )
+            email.send(fail_silently=False)
 
-            # Redirect to the success page using the named URL
+           
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save message in the database
+            contact_message = ContactMessage(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                subject=form.cleaned_data['subject'],
+                message=form.cleaned_data['message']
+            )
+            contact_message.save()
+ 
+            from_email = "no-reply@fcetomokucsc.ng"   
+            admin_email = "admin@fcetomokucsc.ng" 
+            reply_to_email = form.cleaned_data['email']   
+
+            email_body = f"""
+            You have received a new contact form submission:
+
+            Name: {form.cleaned_data['name']}
+            Email: {form.cleaned_data['email']}
+            Subject: {form.cleaned_data['subject']}
+            Message:
+            {form.cleaned_data['message']}
+
+            You can reply directly to this email to respond to the sender.
+            """
+            email = EmailMessage(
+                subject=form.cleaned_data['subject'],
+                body=email_body,
+                from_email=from_email, 
+                to=[admin_email],  
+                reply_to=[reply_to_email]   
+            )
+            email.send(fail_silently=False)
+
             return redirect('career_app/success')  
 
         else:
-            # Form is invalid, re-render with errors
             return render(request, 'career_app/contact.html', {'form': form})
 
     else:
         form = ContactForm()
+    
+    return render(request, "career_app/contact.html", {"form": form})
 
     locations = [
         {"name": "Career Service Centre", "phone": "(814) 842-3838", "address": "FCE(T) Omoku, Rivers State, Nigeria", "email": "info@fcetomokucsc.ng"}
     ]
 
     return render(request, "career_app/contact.html", {"form": form, "locations": locations})
-
  
 
 from django.contrib.auth import get_user_model
@@ -304,7 +354,6 @@ def get_courses(request):
     else:
         return JsonResponse({"error": "Failed to fetch courses"}, status=response.status_code)
 
-
 # Events view
 def events(request):
     return render(request, 'career_app/events.html')
@@ -320,9 +369,3 @@ def resources(request):
 def success_view(request):
     return render(request, 'career_app/success.html')  
 
-
-
- 
-
-
- 
