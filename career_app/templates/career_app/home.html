@@ -169,7 +169,7 @@
             <p class="text-4xl font-bold text-white">Career Service Centre</p>
             <h1 class="mt-4 text-3xl font-semibold text-green-500">Federal College of Education (Technical) Omoku</h1>
             <p class="mt-6 text-lg text-white">Explore our professional career services designed to help you thrive in today’s challenging labour market.</p>
-            <a href="{% url 'career_app/contact' %}" class="mt-8 inline-block bg-yellow-500 text-green-400 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-600 transition">Click Here to Get in Touch</a>
+            <a href="{% url 'career_app/contact' %}" class="mt-8 inline-block bg-yellow-800 text-green-400 font-semibold py-3 px-6 rounded-lg hover:bg-yellow-700 transition">Click here to get in touch</a>
         </div>
         </div>
     </section>
@@ -210,13 +210,7 @@
     </div>
 </section>
 
-    <script>
-        // JavaScript for toggling the menu
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('hidden');
-        });
-    </script>
+    
     <section class="bg-gradient-to-b from-green-800 to-gray-900 py-16 w-full">
         <div class="container mx-auto px-6 lg:px-20">
             <!-- Title Section -->
@@ -233,10 +227,9 @@
                     <img src="{% static 'images/fcetomokucsc_Director.jpg' %}" 
                          alt="Director's Photo" 
                          class="rounded-lg shadow-lg w-full max-w-md object-cover">
-    
                     <!-- Name Overlayed on Bottom of Image -->
-                    <p class="absolute bottom-0 w-full bg-black bg-opacity-60 text-white text-center py-2 text-2xl font-medium rounded-b-lg">
-                        Dr Vivian Mark Williams <br><span class="font-normal text-black">Centre Director</span> 
+                    <p class="absolute bottom-0 w-full text-black text-center py-2 text-3xl font-bold rounded-b-lg">
+                        Dr Vivian Mark Williams <br><span class="font-semibold text-green-500">Centre Director</span> 
                     </p>
                 </div>
     
@@ -356,7 +349,7 @@
                 <div class="text-yellow-400 text-6xl mb-4">
                     <i class="fas fa-users"></i> <!-- Font Awesome Icon -->
                 </div>
-                <h3 class="text-3xl font-bold text-yellow-400 mb-2">300+ Clients</h3>
+                <h3 class="text-3xl font-bold text-yellow-400 mb-2">30+ Clients</h3>
                 <hr class="border-t-4 border-green-300 mt-0 mb-2">
                 <p class="text-gray-300">
                     Trusted by students, alumni, and organizations across various industries.
@@ -377,7 +370,7 @@
                 <div class="text-yellow-400 text-6xl mb-4">
                     <i class="fas fa-chalkboard-teacher"></i> <!-- Font Awesome Icon -->
                 </div>
-                <h3 class="text-3xl font-bold text-yellow-400 mb-2">10+ Career Workshops</h3>
+                <h3 class="text-3xl font-bold text-yellow-400 mb-2">5 Career Workshops</h3>
                 <hr class="border-t-4 border-green-300 mt-0 mb-2">
                 <p class="text-gray-300">
                     Organized impactful workshops to enhance employability skills and career readiness.
@@ -524,6 +517,7 @@
     <div class="newsletter-container">
         <h2 class="newsletter-title">Stay Updated with Our News</h2>
         <p class="newsletter-description">Sign up for our newsletter and be the first to know about our latest updates, offers, and events.</p>
+        
         <form action="/subscribe/" method="POST" class="newsletter-form">
             <input type="email" name="email" class="newsletter-input" placeholder="Enter your email" required>
             <button type="submit" class="newsletter-button">Subscribe</button>
@@ -531,7 +525,6 @@
         <p class="newsletter-footer">We respect your privacy. No spam.</p>
     </div>
 </section>
-
  
 </main>
 
@@ -593,7 +586,7 @@
             <!-- Copyright Section -->
             <div class="text-center mb-auto mt-10 bg-yellow-700 py-8 text-gray-900 font-semibold">
                 <p>&copy; 2025 FCE(T) Omoku Career Services Centre. All rights reserved.</p>
-                <p class="font-bold">Powered By: Rigel Tech Konsultz</p>
+                <p class="font-semibold">Powered By: Rigel IT Consultz</p>
             </div>
         </div>
     </footer>
@@ -601,6 +594,14 @@
 
 <script src="{% static 'js/script.js' %}"></script>
     <script>
+
+        // JavaScript for toggling the menu
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+
+           // JavaScript for 
         document.addEventListener('DOMContentLoaded', function () {
             new Splide('#carousel', {
                 type: 'loop',

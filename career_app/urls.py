@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 from .views import verify_email
 from career_app.views import success_view 
+from .views import subscribe_view
 
 urlpatterns = [
     # Static Pages
@@ -18,6 +19,7 @@ urlpatterns = [
     path('career_app/logout/', views.logout_view, name='career_app/logout'),
     path('verify_email/<str:token>/', views.verify_email, name='verify_email'),
     path('career_app/resend-verification-email/<int:user_id>/', views.resend_verification_email, name='career_app/email/resend_verification_email'),
+    path('career_app/subscribe/', views.subscribe_view, name='career_app/subscribe'),
 
     # Password Reset
     path('career_app/password_reset/', auth_views.PasswordResetView.as_view(), name='career_app/password_reset'),

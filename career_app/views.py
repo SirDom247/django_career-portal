@@ -43,6 +43,10 @@ from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from .models import ContactMessage
+           
+from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect
 
 def contact_view(request):
     if request.method == 'POST':
@@ -56,12 +60,14 @@ def contact_view(request):
                 message=form.cleaned_data['message']
             )
             contact_message.save()
- 
+
+            # Admin email details
             from_email = "no-reply@fcetomokucsc.ng"   
             admin_email = "admin@fcetomokucsc.ng" 
-            reply_to_email = form.cleaned_data['email']   
+            user_email = form.cleaned_data['email']  
 
-            email_body = f"""
+            # Email to Admin
+            admin_email_body = f"""
             You have received a new contact form submission:
 
             Name: {form.cleaned_data['name']}
@@ -72,71 +78,64 @@ def contact_view(request):
 
             You can reply directly to this email to respond to the sender.
             """
-            email = EmailMessage(
-                subject=form.cleaned_data['subject'],
-                body=email_body,
+            admin_email_message = EmailMessage(
+                subject=f"New Contact Form Submission: {form.cleaned_data['subject']}",
+                body=admin_email_body,
                 from_email=from_email, 
                 to=[admin_email],  
-                reply_to=[reply_to_email]   
+                reply_to=[user_email]   
             )
-            email.send(fail_silently=False)
+            admin_email_message.send(fail_silently=False)
 
+            # Acknowledgment Email to User
+            user_email_body = f"""
+            Hello {form.cleaned_data['name']},
+
+            Thank you for reaching out to us. We have received your message and will get back to you soon.
+
+            Below is a copy of your submission:
+            -----------------------------------
+            Subject: {form.cleaned_data['subject']}
+            Message:
+            {form.cleaned_data['message']}
+            -----------------------------------
+
+            Regards,  
+            Career Service Centre  
+            FCE(T) Omoku, Rivers State, Nigeria  
+            """
+            user_email_message = EmailMessage(
+                subject="Thank You for Contacting Us!",
+                body=user_email_body,
+                from_email=from_email,
+                to=[user_email]
+            )
+            user_email_message.send(fail_silently=False)
+
+            # Display success message
+            # messages.success(request, "Your message has been sent successfully. We will get back to you soon!")
+            return redirect('career_app/success')
            
 
-
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Save message in the database
-            contact_message = ContactMessage(
-                name=form.cleaned_data['name'],
-                email=form.cleaned_data['email'],
-                subject=form.cleaned_data['subject'],
-                message=form.cleaned_data['message']
-            )
-            contact_message.save()
- 
-            from_email = "no-reply@fcetomokucsc.ng"   
-            admin_email = "admin@fcetomokucsc.ng" 
-            reply_to_email = form.cleaned_data['email']   
-
-            email_body = f"""
-            You have received a new contact form submission:
-
-            Name: {form.cleaned_data['name']}
-            Email: {form.cleaned_data['email']}
-            Subject: {form.cleaned_data['subject']}
-            Message:
-            {form.cleaned_data['message']}
-
-            You can reply directly to this email to respond to the sender.
-            """
-            email = EmailMessage(
-                subject=form.cleaned_data['subject'],
-                body=email_body,
-                from_email=from_email, 
-                to=[admin_email],  
-                reply_to=[reply_to_email]   
-            )
-            email.send(fail_silently=False)
-
-            return redirect('career_app/success')  
-
         else:
+            messages.error(request, "There was an error with your submission. Please correct the form and try again.")
             return render(request, 'career_app/contact.html', {'form': form})
 
     else:
         form = ContactForm()
-    
-    return render(request, "career_app/contact.html", {"form": form})
 
     locations = [
-        {"name": "Career Service Centre", "phone": "(814) 842-3838", "address": "FCE(T) Omoku, Rivers State, Nigeria", "email": "info@fcetomokucsc.ng"}
+        {
+            "name": "Career Service Centre",
+            "phone": "+23480FCETOMOKUCSC",
+            "address": "FCE(T) Omoku, Rivers State, Nigeria",
+            "email": "info@fcetomokucsc.ng"
+        }
     ]
-
+    
     return render(request, "career_app/contact.html", {"form": form, "locations": locations})
- 
+
+
 
 from django.contrib.auth import get_user_model
 from django.db import transaction, IntegrityError
@@ -369,3 +368,63 @@ def resources(request):
 def success_view(request):
     return render(request, 'career_app/success.html')  
 
+from django.shortcuts import render, redirect
+from django.core.mail import EmailMessage
+from django.contrib import messages
+from .forms import SubscriptionForm
+from .models import Subscriber
+
+def subscribe_view(request):
+    if request.method == 'POST':
+        form = SubscriptionForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            
+            # Check if email already exists in the database
+            if Subscriber.objects.filter(email=email).exists():
+                messages.warning(request, "You are already subscribed!")
+            else:
+                # Save to database
+                subscriber = Subscriber(email=email)
+                subscriber.save()
+
+                # Send email notification to admin
+                admin_email = "admin@domain.com"
+                from_email = "no-reply@domain.com"
+                email_subject = "New Newsletter Subscription"
+                email_body = f"New subscription from: {email}"
+                
+                admin_notification = EmailMessage(
+                    subject=email_subject,
+                    body=email_body,
+                    from_email=from_email,
+                    to=[admin_email]
+                )
+                admin_notification.send(fail_silently=False)
+
+                # Send auto-reply to user
+                user_subject = "Subscription Confirmed"
+                user_body = f"""
+                Hello,
+
+                Thank you for subscribing to our newsletter! You'll now receive updates from us.
+
+                Best regards,  
+                FCET Omoku Library  
+                """
+                user_reply = EmailMessage(
+                    subject=user_subject,
+                    body=user_body,
+                    from_email=from_email,
+                    to=[email]
+                )
+                user_reply.send(fail_silently=False)
+
+                messages.success(request, "Thank you for subscribing! A confirmation email has been sent.")
+
+            return redirect('career_app:subscribe')
+
+    else:
+        form = SubscriptionForm()
+    
+    return render(request, "career_app/subscribe.html", {"form": form})

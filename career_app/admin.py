@@ -42,3 +42,10 @@ class MentorAdmin(admin.ModelAdmin):
     list_display = ('user', 'expertise_area', 'created_at', 'updated_at')
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'expertise_area')
     list_filter = ('expertise_area', 'created_at')
+
+from .models import Subscriber
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'subscribed_at')  # Show email and date
+    search_fields = ('email',)

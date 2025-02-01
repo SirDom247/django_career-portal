@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import UserCreationForm
+from .models import Subscriber
 
 User = get_user_model()  # This will now point to 'career_app.CustomUser'
 
@@ -158,3 +159,19 @@ class ForgotPasswordForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email to reset password'})
     )
+
+
+
+class SubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['email']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'newsletter-input',
+                'placeholder': 'Enter your email',
+                'required': 'required'
+            })
+        }
+
+
